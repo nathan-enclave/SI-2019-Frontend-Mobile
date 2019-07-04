@@ -132,6 +132,11 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
+    public void Signup(View view) {
+        Intent intent = new Intent(LoginActivity.this, SignUpActivity.class);
+        startActivity(intent);
+    }
+
 
     public class postJSON extends AsyncTask<String, Integer, String> {
 
