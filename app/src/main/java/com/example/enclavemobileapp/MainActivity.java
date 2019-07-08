@@ -1,5 +1,9 @@
 package com.example.enclavemobileapp;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -23,14 +27,7 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+        getSupportActionBar().setTitle("Enclave App");
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -64,10 +61,6 @@ public class MainActivity extends AppCompatActivity
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
 
         return super.onOptionsItemSelected(item);
     }
@@ -78,20 +71,45 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
+        DrawerLayout  mDrawerLayout = findViewById(R.id.drawer_layout);
         if (id == R.id.nav_home) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+            mDrawerLayout.closeDrawers();
+        }
+//        } else if (id == R.id.nav_profile) {
+//
+//        }
+        else if (id == R.id.nav_logout) {
+            AlertDialog.Builder builder=new AlertDialog.Builder(MainActivity.this); //Home is name of the activity
+            builder.setMessage("Do you want to exit?");
+            builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int id) {
 
-        } else if (id == R.id.nav_slideshow) {
+                    Intent intent1 = new Intent(MainActivity.this, LoginActivity.class);
+                    startActivity(intent1);
+                }
+            });
 
-        } else if (id == R.id.nav_tools) {
+            builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int id) {
+                    dialog.cancel();
+                }
+            });
 
+            AlertDialog alert=builder.create();
+            alert.show();
         } else if (id == R.id.nav_share) {
-
+            Intent webPageIntent = new Intent(Intent.ACTION_VIEW);
+            webPageIntent.setData(Uri.parse("https://www.facebook.com/enclaveit/"));
+            startActivity(webPageIntent);
         } else if (id == R.id.nav_send) {
+            Intent webPageIntent = new Intent(Intent.ACTION_VIEW);
+            webPageIntent.setData(Uri.parse("http://enclaveit.com/"));
+            startActivity(webPageIntent);
+        } else if (id == R.id.myswitch){
 
         }
-
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
