@@ -3,7 +3,6 @@
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
-
     <color name="colorWhite">#FFFFFF</color>
     <color name="colorGrapeFruit">#ED5565</color>
     <color name="colorGrapeFruitDark">#DA4453</color>
@@ -25,8 +24,6 @@
     <color name="colorPinkRoseDark">#D770AD</color>
     <color name="colorBlack">#0A0A0A</color>
     <color name="colorOrange">#EB714C</color>
-
-
     <color name="backgroundcolor">#fcfcfc</color>
     <color name="lightgray">#ededed</color>
     <color name="deeppurple">#7c4dff</color>

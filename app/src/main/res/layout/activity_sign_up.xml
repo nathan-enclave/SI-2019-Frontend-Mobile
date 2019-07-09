@@ -10,12 +10,11 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
-
-            <!-- Here you can put your logo or brand name -->
 
             <ImageView
                 android:layout_width="match_parent"
@@ -38,13 +37,12 @@
                 android:inputType="textEmailAddress"
                 android:maxLines="1"
                 android:padding="8dp"
-                android:textColorHint="@color/colorBlack"
-                />
+                android:textColorHint="@color/colorBlack"/>
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="@color/colorBlack"
-                />
+                android:background="@color/colorBlack"/>
 
             <EditText
                 android:id="@+id/edt_email"
@@ -58,13 +56,13 @@
                 android:hint="Email"
                 android:maxLines="1"
                 android:padding="8dp"
-                android:textColorHint="@color/colorBlack" />
+                android:textColorHint="@color/colorBlack"/>
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="@color/colorBlack"
-                />
+                android:background="@color/colorBlack"/>
+
             <EditText
                 android:id="@+id/edt_password"
                 android:layout_width="match_parent"
@@ -78,13 +76,13 @@
                 android:inputType="textPassword"
                 android:maxLines="1"
                 android:padding="8dp"
-                android:textColorHint="@color/colorBlack" />
+                android:textColorHint="@color/colorBlack"/>
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="@color/colorBlack"
-                />
+                android:background="@color/colorBlack"/>
+
             <EditText
                 android:id="@+id/edt_confirmPass"
                 android:layout_width="match_parent"
@@ -98,13 +96,12 @@
                 android:inputType="textPassword"
                 android:maxLines="1"
                 android:padding="8dp"
-                android:textColorHint="@color/colorBlack" />
+                android:textColorHint="@color/colorBlack"/>
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="@color/colorBlack" />
-
+                android:background="@color/colorBlack"/>
 
             <Button
                 android:id="@+id/btn_signup"
@@ -118,9 +115,7 @@
                 android:text="Create account"
                 android:textAllCaps="false"
                 android:textColor="@color/colorWhite"
-                android:textSize="18sp" />
-
-
+                android:textSize="18sp"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -139,11 +134,7 @@
                     android:textSize="17dp"
                     android:layout_marginTop="15dp"/>
 
-
             </LinearLayout>
-
-
         </LinearLayout>
     </ScrollView>
-
 </LinearLayout>

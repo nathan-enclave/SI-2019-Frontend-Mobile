@@ -10,9 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
 import org.json.JSONObject;
-
 import java.io.DataOutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -28,9 +26,7 @@ public class SignUpActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
-
         addControls();
-
     }
 
     private void addControls() {
@@ -43,9 +39,7 @@ public class SignUpActivity extends AppCompatActivity {
         mProgress.setMessage("Please wait...");
         mProgress.setCancelable(true);
         mProgress.setIndeterminate(true);
-
         btnSignup = findViewById(R.id.btn_signup);
-
         btnSignup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -62,19 +56,14 @@ public class SignUpActivity extends AppCompatActivity {
                         UserName = edtUsername.getText().toString();
                         Password = edtPassword.getText().toString();
                         ConfirmPass = edtConfimPass.getText().toString();
-
                         try {
-
                             if (!Password.equals(ConfirmPass)) {
                                 Toast.makeText(SignUpActivity.this, "Password Not matching", Toast.LENGTH_SHORT).show();
                             } else {
                                 mProgress.show();
                                 new SignUpActivity.postJSON().execute();
                             }
-
-
                         } catch (Exception e) {
-                            Log.i("myApp", "Error in on create........................." + e.toString());
                         }
                     }
                 }
@@ -96,13 +85,10 @@ public class SignUpActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-
     public class postJSON extends AsyncTask<String, Integer, String> {
-
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
-
             if (s == "OK"){
                 Toast.makeText(SignUpActivity.this,"Sing up successful!",Toast.LENGTH_SHORT).show();
                 Log.i("myAppTag", "(onPostExecute method) Result = Posted");
@@ -115,50 +101,35 @@ public class SignUpActivity extends AppCompatActivity {
 
         @Override
         protected String doInBackground(String... strings) {
-
             try{
                 URL url = new URL("https://cool-demo-api.herokuapp.com/api/v1/auth/register");
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                 conn.setRequestMethod("POST");
                 conn.setRequestProperty("Content-Type", "application/json;charset=UTF-8");
                 conn.setRequestProperty("Accept","application/json");
-
                 JSONObject jsonParam = new JSONObject();
                 jsonParam.put("username", UserName);
                 jsonParam.put("password", Password);
-
-                Log.i("myAppTag", "g=============="+jsonParam);
-
                 DataOutputStream os = new DataOutputStream(conn.getOutputStream());
                 os.writeBytes(jsonParam.toString());
-
                 os.flush();
                 os.close();
-
                 int status = conn.getResponseCode();
-                Log.i("myAppTag", "==================="+status);
-
                 if (status == 200){
                     mProgress.dismiss();
-                    //Toast.makeText(SignUpActivity.this,"Successful!",Toast.LENGTH_SHORT).show();
                     return "OK";
                 }else if(status == 409){
                     mProgress.dismiss();
                     return "exist";
                 }
-
                 else {
-                    //Toast.makeText(SignUpActivity.this, "nooooooooooooooooooo",Toast.LENGTH_SHORT).show();
                     return null;
                 }
-
             }catch (Exception ex){
-                Log.i("myAppTag","Some error............................."+ex.toString());
             }
             return null;
         }
     }
-
 
     @Override
     public void onBackPressed() {
