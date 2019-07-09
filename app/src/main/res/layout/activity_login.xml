@@ -10,12 +10,11 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
-
-            <!-- Here you can put your logo or brand name -->
 
             <ImageView
                 android:layout_width="match_parent"
@@ -38,13 +37,12 @@
                 android:inputType="textEmailAddress"
                 android:maxLines="1"
                 android:padding="8dp"
-                android:textColorHint="@color/colorBlack"
-                />
+                android:textColorHint="@color/colorBlack"/>
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="@color/colorBlack"
-                />
+                android:background="@color/colorBlack"/>
 
             <EditText
                 android:id="@+id/edt_password"
@@ -59,12 +57,12 @@
                 android:inputType="textPassword"
                 android:maxLines="1"
                 android:padding="8dp"
-                android:textColorHint="@color/colorBlack" />
+                android:textColorHint="@color/colorBlack"/>
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="@color/colorBlack" />
+                android:background="@color/colorBlack"/>
 
             <CheckBox
                 android:id="@+id/saveLoginCheckBox"
@@ -74,7 +72,7 @@
                 android:layout_marginBottom="5dp"
                 android:padding="8dp"
                 android:text="Remember me "
-                android:textColor="@color/colorBlack" />
+                android:textColor="@color/colorBlack"/>
 
             <Button
                 android:id="@+id/btn_login"
@@ -101,7 +99,6 @@
                 android:paddingTop="10dp"
                 android:textSize="15dp"/>
 
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -110,33 +107,30 @@
                 android:layout_marginTop="10dp"
                 android:gravity="center">
 
-
                 <ImageView
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:src="@drawable/fb"
-                    android:layout_marginRight="5dp"
-                    />
+                    android:layout_marginRight="5dp"/>
+
                 <ImageView
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:src="@drawable/google"/>
+
                 <ImageView
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:src="@drawable/twiter"
                     android:layout_marginLeft="5dp"/>
 
-
             </LinearLayout>
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="20dp">
 
                 <TextView
-
                     style="@style/TextAppearance.AppCompat.Body2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -145,7 +139,7 @@
                     android:padding="14dp"
                     android:textSize="14dp"
                     android:text="Don't have an account "
-                    android:textColor="@color/colorBlack" />
+                    android:textColor="@color/colorBlack"/>
 
                 <TextView
                     style="@style/TextAppearance.AppCompat.Body2"
@@ -154,11 +148,9 @@
                     android:padding="12dp"
                     android:text="Forgt your Password? "
                     android:textColor="@color/colorBlack"
-                    android:textSize="14dp"
-                    />
-            </LinearLayout>
+                    android:textSize="14dp"/>
 
+            </LinearLayout>
         </LinearLayout>
     </ScrollView>
-
 </LinearLayout>
