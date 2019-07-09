@@ -5,6 +5,5 @@
         android:id="@+id/myswitch"
         android:title=""
         app:showAsAction="always"
-        app:actionLayout="@layout/switch_layout"
-        />
+        app:actionLayout="@layout/switch_layout"/>
 </menu>
