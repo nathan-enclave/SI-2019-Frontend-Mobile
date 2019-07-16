@@ -113,14 +113,11 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public class postJSON extends AsyncTask<String, Integer, String> {
-
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
             if (s == "false"){
                 Toast.makeText(LoginActivity.this, "UserName or password incorrect!", Toast.LENGTH_SHORT).show();
-            }
-            else {
             }
         }
 
@@ -175,7 +172,6 @@ public class LoginActivity extends AppCompatActivity {
         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int id) {
-                finish();
                 System.exit(1);
             }
         });
