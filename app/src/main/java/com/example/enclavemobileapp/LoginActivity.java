@@ -23,7 +23,6 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 public class LoginActivity extends AppCompatActivity {
-
     Button btnLogin;
     ProgressDialog mProgress;
     EditText edtUsername, edtPassword;
@@ -119,6 +118,8 @@ public class LoginActivity extends AppCompatActivity {
             if (s == "false"){
                 Toast.makeText(LoginActivity.this, "UserName or password incorrect!", Toast.LENGTH_SHORT).show();
             }
+            else {
+            }
         }
 
         @Override
@@ -146,7 +147,6 @@ public class LoginActivity extends AppCompatActivity {
                 br.close();
                 os.flush();
                 os.close();
-
                 int status = conn.getResponseCode();
                 if (status == 200){
                     mProgress.dismiss();

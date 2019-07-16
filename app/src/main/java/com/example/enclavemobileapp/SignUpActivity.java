@@ -81,11 +81,9 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
     public class postJSON extends AsyncTask<String, Integer, String> {
-
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
-
             if (s == "OK"){
                 Toast.makeText(SignUpActivity.this,"Sing up successful!",Toast.LENGTH_SHORT).show();
             } else if(s == "exist"){
