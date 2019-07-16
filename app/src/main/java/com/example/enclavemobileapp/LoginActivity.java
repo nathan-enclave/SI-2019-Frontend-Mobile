@@ -82,7 +82,6 @@ public class LoginActivity extends AppCompatActivity {
                         if (view == btnLogin) {
                             InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                             imm.hideSoftInputFromWindow(edtUsername.getWindowToken(), 0);
-
                             if (saveLoginCheckBox.isChecked()) {
                                 loginPrefsEditor.putBoolean("saveLogin", true);
                                 loginPrefsEditor.putString("username", UserName);
