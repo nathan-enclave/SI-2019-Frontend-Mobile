@@ -37,8 +37,7 @@
                 android:inputType="textEmailAddress"
                 android:maxLines="1"
                 android:padding="8dp"
-                android:textColorHint="@color/colorBlack" />
-
+                android:textColorHint="@color/colorBlack"/>
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
@@ -150,7 +149,6 @@
                     android:text="Forgt your Password? "
                     android:textColor="@color/colorBlack"
                     android:textSize="14dp"/>
-
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

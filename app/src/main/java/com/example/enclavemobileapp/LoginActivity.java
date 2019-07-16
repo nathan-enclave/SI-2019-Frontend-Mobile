@@ -61,13 +61,11 @@ public class LoginActivity extends AppCompatActivity {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 if (!checkData()){
                     Toast.makeText(LoginActivity.this, "UserName and password are required!", Toast.LENGTH_SHORT).show();
                 } else {
                     int lengthUser = edtUsername.getText().length();
                     int lengthPass = edtPassword.getText().length();
-
                     if (lengthUser < 3 || lengthPass <3 ){
                         Toast.makeText(LoginActivity.this, "UserName and password must be longer than 3 characters!", Toast.LENGTH_SHORT).show();
                     }
@@ -87,7 +85,7 @@ public class LoginActivity extends AppCompatActivity {
                                 loginPrefsEditor.putString("username", UserName);
                                 loginPrefsEditor.putString("password", Password);
                                 loginPrefsEditor.commit();
-                            } else {
+                            }else {
                                 loginPrefsEditor.clear();
                                 loginPrefsEditor.commit();
                             }
@@ -157,8 +155,7 @@ public class LoginActivity extends AppCompatActivity {
                     startActivity(intent);
                 }else if(status == 409){
                     return "existed";
-                }
-                else {
+                }else {
                     mProgress.dismiss();
                     return "false";
                 }

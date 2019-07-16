@@ -17,6 +17,7 @@ import java.net.URL;
 
 public class SignUpActivity extends AppCompatActivity {
 
+    Button btnSignup;
     Button btnSignup, signin1;
     EditText edtUsername, edtPassword, edtConfimPass;
     String UserName, Password, ConfirmPass;
@@ -33,7 +34,6 @@ public class SignUpActivity extends AppCompatActivity {
         edtUsername = findViewById(R.id.edt_userName);
         edtPassword = findViewById(R.id.edt_password);
         edtConfimPass = findViewById(R.id.edt_confirmPass);
-
         mProgress = new ProgressDialog(SignUpActivity.this);
         mProgress.setTitle("Processing...");
         mProgress.setMessage("Please wait...");
@@ -43,11 +43,12 @@ public class SignUpActivity extends AppCompatActivity {
         btnSignup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                if (!checkData()) {
+                    Toast.makeText(SignUpActivity.this, "UserName and password are required!", Toast.LENGTH_SHORT).show();
+                }else {
                 if (!checkData()) {
                     Toast.makeText(SignUpActivity.this, "UserName and password are required!", Toast.LENGTH_SHORT).show();
                 } else {
-
                     int lengthUser = edtUsername.getText().length();
                     int lengthPass = edtPassword.getText().length();
                     if (lengthUser < 3 || lengthPass < 3) {
@@ -78,14 +79,22 @@ public class SignUpActivity extends AppCompatActivity {
             return true;
         }
     }
-
-
     public void backLogin(View view) {
         Intent intent = new Intent(SignUpActivity.this, LoginActivity.class);
         startActivity(intent);
     }
 
     public class postJSON extends AsyncTask<String, Integer, String> {
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+
+            if (s == "OK"){
+                Toast.makeText(SignUpActivity.this,"Sing up successful!",Toast.LENGTH_SHORT).show();
+            } else if(s == "exist"){
+                Toast.makeText(SignUpActivity.this, "username exists!", Toast.LENGTH_SHORT).show();
+            } else {
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
@@ -121,6 +130,7 @@ public class SignUpActivity extends AppCompatActivity {
                 }else if(status == 409){
                     mProgress.dismiss();
                     return "exist";
+                }else {
                 }
                 else {
                     return null;
