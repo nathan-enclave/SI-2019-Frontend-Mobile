@@ -9,7 +9,6 @@ import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
@@ -24,7 +23,6 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 public class LoginActivity extends AppCompatActivity {
-
     Button btnLogin;
     ProgressDialog mProgress;
     EditText edtUsername, edtPassword;
@@ -39,7 +37,6 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
         addControls();
     }
 
@@ -51,11 +48,9 @@ public class LoginActivity extends AppCompatActivity {
         mProgress.setMessage("Please wait...");
         mProgress.setCancelable(true);
         mProgress.setIndeterminate(true);
-
         saveLoginCheckBox = findViewById(R.id.saveLoginCheckBox);
         loginPreferences = getSharedPreferences("loginPrefs", MODE_PRIVATE);
         loginPrefsEditor = loginPreferences.edit();
-
         saveLogin = loginPreferences.getBoolean("saveLogin", false);
         if (saveLogin == true) {
             edtUsername.setText(loginPreferences.getString("username", ""));
@@ -80,14 +75,10 @@ public class LoginActivity extends AppCompatActivity {
                         mProgress.show();
                         UserName = edtUsername.getText().toString();
                         Password = edtPassword.getText().toString();
-
                         try {
-
                             new postJSON().execute();
-
                         }catch (Exception e){
                         }
-
                         if (view == btnLogin) {
                             InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                             imm.hideSoftInputFromWindow(edtUsername.getWindowToken(), 0);
@@ -101,7 +92,6 @@ public class LoginActivity extends AppCompatActivity {
                                 loginPrefsEditor.commit();
                             }
                         }
-
                     }
                 }
             }
@@ -118,13 +108,19 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
+    public void Signup(View view) {
+        Intent intent = new Intent(LoginActivity.this, SignUpActivity.class);
+        startActivity(intent);
+    }
+
     public class postJSON extends AsyncTask<String, Integer, String> {
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
-
             if (s == "false"){
                 Toast.makeText(LoginActivity.this, "UserName or password incorrect!", Toast.LENGTH_SHORT).show();
+            }
+            else {
             }
         }
 
@@ -153,7 +149,6 @@ public class LoginActivity extends AppCompatActivity {
                 br.close();
                 os.flush();
                 os.close();
-
                 int status = conn.getResponseCode();
                 if (status == 200){
                     mProgress.dismiss();
@@ -168,7 +163,6 @@ public class LoginActivity extends AppCompatActivity {
                     return "false";
                 }
             }catch (Exception ex){
-                Log.i("myAppTag","Some error............................."+ex.toString());
             }
             return null;
         }
