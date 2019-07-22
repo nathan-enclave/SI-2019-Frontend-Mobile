@@ -289,20 +289,17 @@ public class MainActivity extends AppCompatActivity
             builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int id) {
-
                     Intent intent = new Intent(MainActivity.this, LoginActivity.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP); // dont reload
                     startActivity(intent);
                 }
             });
-
             builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int id) {
                     dialog.cancel();
                 }
             });
-
             AlertDialog alert=builder.create();
             alert.show();
         } else if (id == R.id.nav_share) {

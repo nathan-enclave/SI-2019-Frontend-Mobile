@@ -9,7 +9,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/bgrect">
-
     </FrameLayout>
 
     <RelativeLayout
@@ -101,8 +100,8 @@
                 android:paddingTop="16dp"
                 android:paddingBottom="16dp"
                 android:drawablePadding="16dp">
-
             </EditText>
+
             <EditText
                 android:textColor="#fff"
                 android:id="@+id/edt_confirmPass"
@@ -119,6 +118,5 @@
                 android:drawablePadding="16dp">
             </EditText>
         </LinearLayout>
-
     </RelativeLayout>
 </RelativeLayout>
