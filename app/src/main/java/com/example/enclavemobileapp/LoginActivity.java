@@ -1,7 +1,6 @@
 package com.example.enclavemobileapp;
 
 import android.app.AlertDialog;
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -11,9 +10,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 import org.json.JSONObject;
 import java.io.BufferedReader;
@@ -21,15 +20,17 @@ import java.io.DataOutputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import dmax.dialog.SpotsDialog;
 
 public class LoginActivity extends AppCompatActivity {
-    Button btnLogin;
-    ProgressDialog mProgress;
-    EditText edtUsername, edtPassword;
-    String UserName, Password, usernameget;
 
+    TextView btnLogin;
+    AlertDialog mProgress;
+    EditText edtUsername, edtPassword;
+    String UserName, Password;
+    int id;
     private CheckBox saveLoginCheckBox;
-    private SharedPreferences loginPreferences; // save status
+    private SharedPreferences loginPreferences;
     private SharedPreferences.Editor loginPrefsEditor;
     private Boolean saveLogin;
 
@@ -43,11 +44,7 @@ public class LoginActivity extends AppCompatActivity {
     private void addControls() {
         edtUsername = findViewById(R.id.edt_userName);
         edtPassword = findViewById(R.id.edt_password);
-        mProgress = new ProgressDialog(LoginActivity.this);
-        mProgress.setTitle("Processing...");
-        mProgress.setMessage("Please wait...");
-        mProgress.setCancelable(true);
-        mProgress.setIndeterminate(true);
+        mProgress = new SpotsDialog(this, R.style.Custom);
         saveLoginCheckBox = findViewById(R.id.saveLoginCheckBox);
         loginPreferences = getSharedPreferences("loginPrefs", MODE_PRIVATE);
         loginPrefsEditor = loginPreferences.edit();
@@ -61,6 +58,7 @@ public class LoginActivity extends AppCompatActivity {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 if (!checkData()){
                     Toast.makeText(LoginActivity.this, "UserName and password are required!", Toast.LENGTH_SHORT).show();
                 } else {
@@ -85,11 +83,12 @@ public class LoginActivity extends AppCompatActivity {
                                 loginPrefsEditor.putString("username", UserName);
                                 loginPrefsEditor.putString("password", Password);
                                 loginPrefsEditor.commit();
-                            }else {
+                            } else {
                                 loginPrefsEditor.clear();
                                 loginPrefsEditor.commit();
                             }
                         }
+
                     }
                 }
             }
@@ -106,11 +105,6 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
-    public void Signup(View view) {
-        Intent intent = new Intent(LoginActivity.this, SignUpActivity.class);
-        startActivity(intent);
-    }
-
     public class postJSON extends AsyncTask<String, Integer, String> {
         @Override
         protected void onPostExecute(String s) {
@@ -125,7 +119,7 @@ public class LoginActivity extends AppCompatActivity {
         @Override
         protected String doInBackground(String... strings) {
             try{
-                URL url = new URL("https://cool-demo-api.herokuapp.com/api/v1/auth/login");
+                URL url = new URL("http://si-enclave.herokuapp.com/api/v1/auth/login");
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                 conn.setRequestMethod("POST");
                 conn.setRequestProperty("Content-Type", "application/json;charset=UTF-8");
@@ -143,7 +137,7 @@ public class LoginActivity extends AppCompatActivity {
                     builder.append(line);
                 }
                 JSONObject jsonArray = new JSONObject(builder.toString());
-                usernameget = jsonArray.getString("scope");
+                id = jsonArray.getInt("id");
                 br.close();
                 os.flush();
                 os.close();
@@ -151,15 +145,18 @@ public class LoginActivity extends AppCompatActivity {
                 if (status == 200){
                     mProgress.dismiss();
                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                    intent.putExtra("usernameset", usernameget);
+                    intent.putExtra("id", id);
                     startActivity(intent);
-                }else if(status == 409){
+                }else if(status == 404){
+                    mProgress.dismiss();
                     return "existed";
-                }else {
+                }
+                else{
                     mProgress.dismiss();
                     return "false";
                 }
             }catch (Exception ex){
+                mProgress.dismiss();
             }
             return null;
         }
@@ -172,9 +169,10 @@ public class LoginActivity extends AppCompatActivity {
         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int id) {
-                System.exit(1);
+                finish();
             }
         });
+
         builder.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int id) {
@@ -184,5 +182,10 @@ public class LoginActivity extends AppCompatActivity {
         AlertDialog alert=builder.create();
         alert.show();
         super.onBackPressed();
+    }
+
+    public void signUp(View view) {
+        Intent intent = new Intent(LoginActivity.this, SignUpActivity.class);
+        startActivity(intent);
     }
 }

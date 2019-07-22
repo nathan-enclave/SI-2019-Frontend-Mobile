@@ -6,8 +6,8 @@ import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 import org.json.JSONObject;
 import java.io.DataOutputStream;
@@ -16,7 +16,7 @@ import java.net.URL;
 
 public class SignUpActivity extends AppCompatActivity {
 
-    Button btnSignup;
+    TextView btnSignup;
     EditText edtUsername, edtPassword, edtConfimPass;
     String UserName, Password, ConfirmPass;
     ProgressDialog mProgress;
@@ -43,7 +43,7 @@ public class SignUpActivity extends AppCompatActivity {
             public void onClick(View view) {
                 if (!checkData()) {
                     Toast.makeText(SignUpActivity.this, "UserName and password are required!", Toast.LENGTH_SHORT).show();
-                }else {
+                } else {
                     int lengthUser = edtUsername.getText().length();
                     int lengthPass = edtPassword.getText().length();
                     if (lengthUser < 3 || lengthPass < 3) {
@@ -77,6 +77,7 @@ public class SignUpActivity extends AppCompatActivity {
 
     public void backLogin(View view) {
         Intent intent = new Intent(SignUpActivity.this, LoginActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
         startActivity(intent);
     }
 
@@ -85,7 +86,7 @@ public class SignUpActivity extends AppCompatActivity {
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
             if (s == "OK"){
-                Toast.makeText(SignUpActivity.this,"Sing up successful!",Toast.LENGTH_SHORT).show();
+                Toast.makeText(SignUpActivity.this,"Sign up successful!",Toast.LENGTH_SHORT).show();
             } else if(s == "exist"){
                 Toast.makeText(SignUpActivity.this, "username exists!", Toast.LENGTH_SHORT).show();
             } else {
@@ -95,7 +96,7 @@ public class SignUpActivity extends AppCompatActivity {
         @Override
         protected String doInBackground(String... strings) {
             try{
-                URL url = new URL("https://cool-demo-api.herokuapp.com/api/v1/auth/register");
+                URL url = new URL("http://si-enclave.herokuapp.com/api/v1/auth/register");
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                 conn.setRequestMethod("POST");
                 conn.setRequestProperty("Content-Type", "application/json;charset=UTF-8");
@@ -114,7 +115,8 @@ public class SignUpActivity extends AppCompatActivity {
                 }else if(status == 409){
                     mProgress.dismiss();
                     return "exist";
-                }else {
+                }
+                else {
                     return null;
                 }
             }catch (Exception ex){
@@ -127,6 +129,7 @@ public class SignUpActivity extends AppCompatActivity {
     public void onBackPressed() {
         super.onBackPressed();
         Intent intent = new Intent(SignUpActivity.this, LoginActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
         startActivity(intent);
     }
 }

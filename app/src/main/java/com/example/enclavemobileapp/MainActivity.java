@@ -266,7 +266,6 @@ public class MainActivity extends AppCompatActivity
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
-
         MenuItem menuItem= menu.findItem(R.id.myswitch);
         View view = MenuItemCompat.getActionView(menuItem);
         final Switch switcha = (Switch) view.findViewById(R.id.switchForActionBar);
@@ -335,7 +334,6 @@ public class MainActivity extends AppCompatActivity
             webPageIntent.setData(Uri.parse("http://enclaveit.com/"));
             startActivity(webPageIntent);
         } else if (id == R.id.myswitch){
-
         }
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
