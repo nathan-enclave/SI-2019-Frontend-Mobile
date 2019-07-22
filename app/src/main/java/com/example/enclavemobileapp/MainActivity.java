@@ -73,7 +73,6 @@ public class MainActivity extends AppCompatActivity
         tabLayout.addTab(tabLayout.newTab().setText(""));
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
         tabLayout.setVisibility(View.GONE);
-
         final ViewPager viewPager = (ViewPager)findViewById(R.id.pager);
         final PagerAdapter adapter = new adapter.PagerAdapter(getSupportFragmentManager(), tabLayout.getTabCount());
         viewPager.setAdapter(adapter);
@@ -137,7 +136,6 @@ public class MainActivity extends AppCompatActivity
         });
         MainActivity.ListEngineers task = new MainActivity.ListEngineers();
         task.execute();
-
     }
 
     class ListEngineers extends AsyncTask<Void, Void, ArrayList<Engineers>> {
@@ -219,13 +217,11 @@ public class MainActivity extends AppCompatActivity
                 totalPro = jsonObject.getInt("project");
                 totalTeam = jsonObject.getInt("team");
                 totalManager = jsonObject.getInt("manager");
-
                 try {
                     URL url2 = new URL("https://cool-demo-api.herokuapp.com/api/v1/engineers/"+id);// link API
                     HttpURLConnection conn = (HttpURLConnection) url2.openConnection();
                     conn.setRequestMethod("GET");
                     conn.setRequestProperty("Content-Type", "application/json;charset=UTF-8");
-
                     InputStreamReader isr2 = new InputStreamReader(conn.getInputStream(), "UTF-8");
                     BufferedReader br2 = new BufferedReader(isr2);
                     StringBuilder builder2 = new StringBuilder();
@@ -240,16 +236,13 @@ public class MainActivity extends AppCompatActivity
                     Strava = jsonArray2.getString("avatar");
 
                 } catch (Exception e){
-
                 }
                 br.close();
-
             } catch (Exception ex) {
                 Log.e("LOI", ex.toString());
             }
             return dsEngineer;
         }
-
     }
 
     @Override
@@ -272,7 +265,6 @@ public class MainActivity extends AppCompatActivity
         switcha.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-
                 if (isChecked){
                     getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_YES);
                 } else {
@@ -282,15 +274,6 @@ public class MainActivity extends AppCompatActivity
         });
         return super.onCreateOptionsMenu(menu);
     }
-
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        int id = item.getItemId();
-//
-//        return super.onOptionsItemSelected(item);
-//    }
-
-    @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
@@ -300,9 +283,6 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.nav_home) {
             mDrawerLayout.closeDrawers();
         }
-//        } else if (id == R.id.nav_profile) {
-//
-//        }
         else if (id == R.id.nav_logout) {
             AlertDialog.Builder builder=new AlertDialog.Builder(MainActivity.this); //Home is name of the activity
             builder.setMessage("Do you want to exit?");
