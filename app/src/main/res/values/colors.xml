@@ -32,4 +32,6 @@
     <color name="darkblue">#23283a</color>
     <color name="testcolorblue">#152b38</color>
     <color name="pink">#fe104d</color>
+    <color name="dot_inactive">#cccccc</color>
+    <color name="dot_active">#000000</color>
 </resources>
