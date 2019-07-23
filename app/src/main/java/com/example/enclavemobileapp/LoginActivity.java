@@ -103,6 +103,11 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
+    public void forgetPassword(View view) {
+        Intent intent = new Intent(LoginActivity.this, ResetPasswordActivity.class);
+        startActivity(intent);
+    }
+
     public class postJSON extends AsyncTask<String, Integer, String> {
         @Override
         protected void onPostExecute(String s) {
@@ -179,10 +184,5 @@ public class LoginActivity extends AppCompatActivity {
         AlertDialog alert=builder.create();
         alert.show();
         super.onBackPressed();
-    }
-
-    public void signUp(View view) {
-        Intent intent = new Intent(LoginActivity.this, SignUpActivity.class);
-        startActivity(intent);
     }
 }

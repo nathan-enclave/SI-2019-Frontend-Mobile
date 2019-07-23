@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import com.github.mikephil.charting.animation.Easing;
 import com.github.mikephil.charting.charts.PieChart;
@@ -29,6 +30,7 @@ import java.util.List;
 public class Tab1 extends Fragment {
     int inProgress, pending, done;
     ProgressBar progressBar;
+    LinearLayout llPro;
     String[] mChartLabel = new String[]{"Inprogress", "Pending", "Done", "", "", "", "", "", "", "", "", ""};
     PieChart pieChart;
     // TODO: Rename parameter arguments, choose names that match
@@ -52,16 +54,8 @@ public class Tab1 extends Fragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         pieChart = (PieChart) view.findViewById(R.id.pieChart);
-        progressBar = view.findViewById(R.id.progressbar);
-        Runnable progressRunnable = new Runnable() {
-
-            @Override
-            public void run() {
-                progressBar.setVisibility(View.GONE);
-            }
-        };
-        Handler pdCanceller = new Handler();
-        pdCanceller.postDelayed(progressRunnable, 1000);
+        progressBar = view.findViewById(R.id.progressBar);
+        llPro = view.findViewById(R.id.ll_pro);
         pieChart.setUsePercentValues(true);
         pieChart.getDescription().setEnabled(false);
         pieChart.setExtraOffsets(5, 10, 5, 5);
@@ -107,6 +101,9 @@ public class Tab1 extends Fragment {
             // undo all highlights
             pieChart.highlightValues(null);
             pieChart.invalidate();
+            if (pieChart.getData() != null){
+                llPro.setVisibility(View.GONE);
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
