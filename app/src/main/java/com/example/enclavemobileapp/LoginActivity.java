@@ -58,7 +58,6 @@ public class LoginActivity extends AppCompatActivity {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 if (!checkData()){
                     Toast.makeText(LoginActivity.this, "UserName and password are required!", Toast.LENGTH_SHORT).show();
                 } else {
@@ -88,7 +87,6 @@ public class LoginActivity extends AppCompatActivity {
                                 loginPrefsEditor.commit();
                             }
                         }
-
                     }
                 }
             }
@@ -172,7 +170,6 @@ public class LoginActivity extends AppCompatActivity {
                 finish();
             }
         });
-
         builder.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int id) {

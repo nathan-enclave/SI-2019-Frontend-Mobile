@@ -94,6 +94,7 @@ public class MainActivity extends AppCompatActivity
         });
         addControls();
     }
+
     private void addBottomDots(int position) {
         dots = new TextView[layouts.length];
         dotsLayout.removeAllViews();
@@ -107,6 +108,7 @@ public class MainActivity extends AppCompatActivity
         if (dots.length > 0)
             dots[position].setTextColor(getResources().getColor(R.color.dot_active));
     }
+
     private void addControls() {
         ViewPager viewPager = (ViewPager) findViewById(R.id.view_pager);
         dotsLayout = (LinearLayout) findViewById(R.id.layoutDots);
@@ -239,7 +241,6 @@ public class MainActivity extends AppCompatActivity
                 }
                 br.close();
             } catch (Exception ex) {
-                Log.e("LOI", ex.toString());
             }
             return dsEngineer;
         }
@@ -257,7 +258,6 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
         MenuItem menuItem= menu.findItem(R.id.myswitch);
         View view = MenuItemCompat.getActionView(menuItem);
@@ -276,9 +276,7 @@ public class MainActivity extends AppCompatActivity
     }
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
         int id = item.getItemId();
-
         DrawerLayout  mDrawerLayout = findViewById(R.id.drawer_layout);
         if (id == R.id.nav_home) {
             mDrawerLayout.closeDrawers();
