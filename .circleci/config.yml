@@ -3,25 +3,18 @@ jobs:
   build:
     working_directory: ~/code
     docker:
-      - image: circleci/android:api-25-alpha
+    - image: circleci/android:api-25-alpha
     environment:
-      JVM_OPTS: -Xmx3200m
+    - JVM_OPTS: -Xmx3200m
     steps:
-      - checkout
-      - restore_cache:
-          key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
-      # - run:
-      #     name: chmod permissions
-      #     command: chmod +x ./gradlew
-      # - save_cache:
-      #     paths:
-      #       - ~/.gradle
-      #     key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
-      - run:
-          name: Run Tests
-          command: ./gradlew lint test
-      - store_artifacts:
-          path: app/build/reports
-          destination: reports
-      - store_test_results:
-          path: app/build/test-results
+    - checkout
+    - restore_cache:
+        key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
+    - run:
+        name: Run Tests
+        command: ./gradlew lint test
+    - store_artifacts:
+        path: app/build/reports
+        destination: reports
+    - store_test_results:
+        path: app/build/test-results
