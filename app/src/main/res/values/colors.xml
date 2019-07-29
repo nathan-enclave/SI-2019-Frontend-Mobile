@@ -34,4 +34,8 @@
     <color name="pink">#fe104d</color>
     <color name="dot_inactive">#cccccc</color>
     <color name="dot_active">#000000</color>
+    <color name="df_transparent_black_background">#80000000</color>
+    <color name="whiteCardColor">#fff</color>
+    <color name="whiteTextColor">#fff</color>
+    <color name="blackTextColor">#000</color>
 </resources>
