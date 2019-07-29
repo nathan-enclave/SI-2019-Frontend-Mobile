@@ -3,11 +3,11 @@ package com.example.enclavemobileapp;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import com.github.mikephil.charting.animation.Easing;
 import com.github.mikephil.charting.charts.PieChart;
@@ -27,17 +27,26 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Tab1 extends Fragment {
+
     int inProgress, pending, done;
     ProgressBar progressBar;
+    LinearLayout llPro;
     String[] mChartLabel = new String[]{"Inprogress", "Pending", "Done", "", "", "", "", "", "", "", "", ""};
     PieChart pieChart;
+
     // TODO: Rename parameter arguments, choose names that match
+    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+
     // TODO: Rename and change types of parameters
+    private String txtaa;
+    private String mParam2;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setHasOptionsMenu(true);
         ListEngineers task = new ListEngineers();
         task.execute();
@@ -46,26 +55,23 @@ public class Tab1 extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         View view = inflater.inflate(R.layout.fragment1, container, false);
         return view;
     }
+
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
-        pieChart = (PieChart) view.findViewById(R.id.pieChart);
-        progressBar = view.findViewById(R.id.progressbar);
-        Runnable progressRunnable = new Runnable() {
+        // Setup any handles to view objects here
+        // EditText etFoo = (EditText) view.findViewById(R.id.etFoo);
 
-            @Override
-            public void run() {
-                progressBar.setVisibility(View.GONE);
-            }
-        };
-        Handler pdCanceller = new Handler();
-        pdCanceller.postDelayed(progressRunnable, 1000);
+        pieChart = (PieChart) view.findViewById(R.id.pieChart);
+        progressBar = view.findViewById(R.id.progressBar);
+        llPro = view.findViewById(R.id.ll_pro);
         pieChart.setUsePercentValues(true);
         pieChart.getDescription().setEnabled(false);
         pieChart.setExtraOffsets(5, 10, 5, 5);
-        pieChart.setDrawEntryLabels(false); // disable label items8
+        pieChart.setDrawEntryLabels(false); // disable label items
         // Disable Legend Chart View
         Legend l = pieChart.getLegend();
         l.setEnabled(true);
@@ -107,6 +113,9 @@ public class Tab1 extends Fragment {
             // undo all highlights
             pieChart.highlightValues(null);
             pieChart.invalidate();
+            if (pieChart.getData() != null){
+                llPro.setVisibility(View.GONE);
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -117,6 +126,7 @@ public class Tab1 extends Fragment {
         @Override
         protected void onPostExecute(String s) {
             List<Float> arrAmount = new ArrayList<>();
+            // Add Fix 2 Items into Chart
             arrAmount.add(Float.parseFloat(inProgress+"")); //99000000f
             arrAmount.add(Float.parseFloat(pending+""));
             arrAmount.add(Float.parseFloat(done+""));
