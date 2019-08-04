@@ -1,9 +1,9 @@
 package com.example.enclavemobileapp;
 
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,21 +26,35 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import static android.content.Context.MODE_PRIVATE;
 
 public class Tab1 extends Fragment {
+
     int inProgress, pending, done;
     ProgressBar progressBar;
     LinearLayout llPro;
     String[] mChartLabel = new String[]{"Inprogress", "Pending", "Done", "", "", "", "", "", "", "", "", ""};
     PieChart pieChart;
+    String tokenRead;
+
+
     // TODO: Rename parameter arguments, choose names that match
+    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+
     // TODO: Rename and change types of parameters
+    private String txtaa;
+    private String mParam2;
+
+
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setHasOptionsMenu(true);
+
         ListEngineers task = new ListEngineers();
         task.execute();
     }
@@ -48,18 +62,22 @@ public class Tab1 extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         View view = inflater.inflate(R.layout.fragment1, container, false);
         return view;
     }
+
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
+        // Setup any handles to view objects here
+
         pieChart = (PieChart) view.findViewById(R.id.pieChart);
         progressBar = view.findViewById(R.id.progressBar);
         llPro = view.findViewById(R.id.ll_pro);
         pieChart.setUsePercentValues(true);
         pieChart.getDescription().setEnabled(false);
         pieChart.setExtraOffsets(5, 10, 5, 5);
-        pieChart.setDrawEntryLabels(false); // disable label items8
+        pieChart.setDrawEntryLabels(false); // disable label items
         // Disable Legend Chart View
         Legend l = pieChart.getLegend();
         l.setEnabled(true);
@@ -72,16 +90,19 @@ public class Tab1 extends Fragment {
         // enable rotation of the chart by touch
         pieChart.setRotationEnabled(true);
         pieChart.setHighlightPerTapEnabled(true);
+
     }
 
     private void setData(List<Float> amounts) {
         try {
             ArrayList<PieEntry> entries = new ArrayList<>();
+
             for (int i = 0; i < amounts.size(); i++) {
                 entries.add(new PieEntry(amounts.get(i),
                         mChartLabel[i % mChartLabel.length]));
             }
-            PieDataSet dataSet = new PieDataSet(entries, "Project statistical");
+            PieDataSet dataSet = new PieDataSet(entries, "");
+            dataSet.setValueTextSize(15f);
             dataSet.setDrawIcons(true);
             dataSet.setSliceSpace(2f);
             dataSet.setIconsOffset(new MPPointF(0, 40));
@@ -101,6 +122,9 @@ public class Tab1 extends Fragment {
             // undo all highlights
             pieChart.highlightValues(null);
             pieChart.invalidate();
+            Legend legend = pieChart.getLegend();
+            legend.setFormSize(15f);
+            legend.setTextSize(15f);
             if (pieChart.getData() != null){
                 llPro.setVisibility(View.GONE);
             }
@@ -112,8 +136,15 @@ public class Tab1 extends Fragment {
     class ListEngineers extends AsyncTask<String, Void, String> {
 
         @Override
+        protected void onPreExecute() {
+            readData();
+            super.onPreExecute();
+        }
+
+        @Override
         protected void onPostExecute(String s) {
             List<Float> arrAmount = new ArrayList<>();
+            // Add Fix 2 Items into Chart
             arrAmount.add(Float.parseFloat(inProgress+"")); //99000000f
             arrAmount.add(Float.parseFloat(pending+""));
             arrAmount.add(Float.parseFloat(done+""));
@@ -123,10 +154,12 @@ public class Tab1 extends Fragment {
 
         @Override
         protected String doInBackground(String... strings) {
+
             try {
-                URL url = new URL("http://si-enclave.herokuapp.com/api/v1/dashboard/projects");// link API
+                URL url = new URL("http://si-enclave.herokuapp.com/api/v1/dashboard/statistic/projects/status");// link API
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                 connection.setRequestMethod("GET");
+                connection.setRequestProperty("Authorization", tokenRead);
                 connection.setRequestProperty("Content-Type", "application/json;charset=UTF-8");
                 InputStreamReader isr = new InputStreamReader(connection.getInputStream(), "UTF-8");
                 BufferedReader br = new BufferedReader(isr);
@@ -145,5 +178,11 @@ public class Tab1 extends Fragment {
             }
             return null;
         }
+    }
+
+    public void readData()
+    {
+        SharedPreferences preferences = this.getActivity().getSharedPreferences("token", MODE_PRIVATE);
+        tokenRead = preferences.getString("token", "");
     }
 }

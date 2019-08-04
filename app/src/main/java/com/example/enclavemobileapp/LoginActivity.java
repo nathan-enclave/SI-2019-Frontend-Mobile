@@ -29,8 +29,10 @@ public class LoginActivity extends AppCompatActivity {
     EditText edtUsername, edtPassword;
     String UserName, Password;
     int id;
+    String token, tokenRead;
+
     private CheckBox saveLoginCheckBox;
-    private SharedPreferences loginPreferences;
+    private SharedPreferences loginPreferences; // save status
     private SharedPreferences.Editor loginPrefsEditor;
     private Boolean saveLogin;
 
@@ -38,31 +40,39 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        getSupportActionBar().hide();
+
         addControls();
     }
 
     private void addControls() {
         edtUsername = findViewById(R.id.edt_userName);
         edtPassword = findViewById(R.id.edt_password);
+
         mProgress = new SpotsDialog(this, R.style.Custom);
+
         saveLoginCheckBox = findViewById(R.id.saveLoginCheckBox);
         loginPreferences = getSharedPreferences("loginPrefs", MODE_PRIVATE);
         loginPrefsEditor = loginPreferences.edit();
+
         saveLogin = loginPreferences.getBoolean("saveLogin", false);
         if (saveLogin == true) {
             edtUsername.setText(loginPreferences.getString("username", ""));
             edtPassword.setText(loginPreferences.getString("password", ""));
             saveLoginCheckBox.setChecked(true);
         }
+
         btnLogin = findViewById(R.id.btn_login);
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 if (!checkData()){
                     Toast.makeText(LoginActivity.this, "UserName and password are required!", Toast.LENGTH_SHORT).show();
                 } else {
                     int lengthUser = edtUsername.getText().length();
                     int lengthPass = edtPassword.getText().length();
+
                     if (lengthUser < 3 || lengthPass <3 ){
                         Toast.makeText(LoginActivity.this, "UserName and password must be longer than 3 characters!", Toast.LENGTH_SHORT).show();
                     }
@@ -77,6 +87,7 @@ public class LoginActivity extends AppCompatActivity {
                         if (view == btnLogin) {
                             InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                             imm.hideSoftInputFromWindow(edtUsername.getWindowToken(), 0);
+
                             if (saveLoginCheckBox.isChecked()) {
                                 loginPrefsEditor.putBoolean("saveLogin", true);
                                 loginPrefsEditor.putString("username", UserName);
@@ -103,19 +114,18 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
-    public void forgetPassword(View view) {
-        Intent intent = new Intent(LoginActivity.this, ResetPasswordActivity.class);
-        startActivity(intent);
-    }
-
     public class postJSON extends AsyncTask<String, Integer, String> {
+
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
+
+            writeData();
+            readData();
+
             if (s == "false"){
                 Toast.makeText(LoginActivity.this, "UserName or password incorrect!", Toast.LENGTH_SHORT).show();
-            }
-            else {
+            } else {
             }
         }
 
@@ -141,9 +151,13 @@ public class LoginActivity extends AppCompatActivity {
                 }
                 JSONObject jsonArray = new JSONObject(builder.toString());
                 id = jsonArray.getInt("id");
+                token = jsonArray.getString("token");
+
                 br.close();
+
                 os.flush();
                 os.close();
+
                 int status = conn.getResponseCode();
                 if (status == 200){
                     mProgress.dismiss();
@@ -158,11 +172,38 @@ public class LoginActivity extends AppCompatActivity {
                     mProgress.dismiss();
                     return "false";
                 }
+
             }catch (Exception ex){
                 mProgress.dismiss();
+                runOnUiThread(new Runnable()
+                {
+                    public void run()
+                    {
+                        Toast.makeText(LoginActivity.this, "Username or password incorrect!", Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
             return null;
         }
+    }
+
+    public void signUp(View view) {
+        Intent intent = new Intent(LoginActivity.this, ResetPasswordActivity.class);
+        startActivity(intent);
+    }
+
+    public void writeData()
+    {
+        SharedPreferences preferences = getSharedPreferences("token", MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString("token", token);
+        editor.commit();
+    }
+
+    public void readData()
+    {
+        SharedPreferences preferences = getSharedPreferences("token", MODE_PRIVATE);
+        tokenRead = preferences.getString("token", "");
     }
 
     @Override
@@ -172,17 +213,16 @@ public class LoginActivity extends AppCompatActivity {
         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int id) {
-                finish();
+                finishAffinity();
             }
         });
         builder.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int id) {
-                dialog.cancel();
+                dialog.dismiss();
             }
         });
         AlertDialog alert=builder.create();
         alert.show();
-        super.onBackPressed();
     }
 }
