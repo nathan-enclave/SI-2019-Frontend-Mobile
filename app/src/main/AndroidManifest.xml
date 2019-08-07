@@ -11,7 +11,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ListEngineerActivity"></activity>
+        <activity android:name=".ProjectActivity"></activity>
+        <activity android:name=".ListEngineerActivity" />
         <activity android:name=".DetailProjectActivity" />
         <activity android:name=".DetailEnActivity" />
         <activity android:name=".TeamDetailActivity" />
