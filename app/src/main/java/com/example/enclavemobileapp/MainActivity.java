@@ -146,6 +146,8 @@ public class MainActivity extends AppCompatActivity
         llEngineer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, ListEngineerActivity.class);
+                startActivity(intent);
             }
         });
 

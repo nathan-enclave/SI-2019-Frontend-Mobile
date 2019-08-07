@@ -11,7 +11,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".DetailProjectActivity"></activity>
+        <activity android:name=".ListEngineerActivity"></activity>
+        <activity android:name=".DetailProjectActivity" />
         <activity android:name=".DetailEnActivity" />
         <activity android:name=".TeamDetailActivity" />
         <activity android:name=".ResetPassword2Activity" />
@@ -31,6 +32,7 @@
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".TeamActivity" />
+        <activity android:name=".AlphalbetActivity" />
     </application>
 
 </manifest>
