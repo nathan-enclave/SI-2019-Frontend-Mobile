@@ -1,9 +1,258 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.enclavemobileapp.DetailProjectActivity">
+    android:orientation="vertical"
+    android:id="@+id/ll">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:clipToPadding="false"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="About Project"
+                        android:textSize="19dp"
+                        android:textStyle="bold"
+                        android:background="@drawable/box_shape2"
+                        style="@style/TextAppearance.AppCompat.Headline"
+                        android:textAlignment="center"/>
+
+                    <TextView
+                        android:id="@+id/txt_description"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="5dp"
+                        android:text="This is the description"
+                        android:textSize="14dp" style="@style/TextAppearance.AppCompat.Body1" />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_margin="10dp"
+                    android:background="@color/blackTextColor" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal"
+                        android:layout_marginLeft="10dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical"
+                            android:padding="15dp"
+                            android:layout_weight="1">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textStyle="bold"
+                                style="@style/TextAppearance.AppCompat.Headline"
+                                android:text="Technology"/>
+                            <TextView
+                                android:id="@+id/txt_technologyProject"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="5dp"
+                                style="@style/TextAppearance.AppCompat.Body1"
+                                android:text=""/>
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:background="@color/lightgray" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textStyle="bold"
+                                style="@style/TextAppearance.AppCompat.Headline"
+                                android:text="Start Day"/>
+                            <TextView
+                                android:id="@+id/txt_startDay"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="5dp"
+                                style="@style/TextAppearance.AppCompat.Body1"
+                                android:text=""/>
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:background="@color/lightgray" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textStyle="bold"
+                                style="@style/TextAppearance.AppCompat.Headline"
+                                android:text="End Day"/>
+                            <TextView
+                                android:id="@+id/txt_endDay"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                style="@style/TextAppearance.AppCompat.Body1"
+                                android:text=""/>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical"
+                            android:padding="15dp"
+                            android:layout_weight="1">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textStyle="bold"
+                                style="@style/TextAppearance.AppCompat.Headline"
+                                android:text="Status"/>
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/box_shape"
+                                android:layout_marginLeft="5dp">
+
+                                <TextView
+                                    android:id="@+id/txt_status"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textStyle="bold"
+                                    android:textColor="@color/colorBlack"
+                                    android:padding="3dp"
+                                    android:background="#273c75"
+                                    android:text="done"/>
+
+                            </LinearLayout>
+
+                            <!--<TextView-->
+                            <!--android:id="@+id/txt_status"-->
+                            <!--android:layout_width="wrap_content"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:layout_marginBottom="5dp"-->
+                            <!--style="@style/TextAppearance.AppCompat.Body1"-->
+                            <!--android:text=""/>-->
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:background="@color/lightgray" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textStyle="bold"
+                                style="@style/TextAppearance.AppCompat.Headline"
+                                android:text="Earning"/>
+                            <TextView
+                                android:id="@+id/txt_earning"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                style="@style/TextAppearance.AppCompat.Body1"
+                                android:layout_marginBottom="5dp"
+                                android:text=""/>
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:background="@color/lightgray" />
+
+                            <LinearLayout
+                                android:id="@+id/ll_teamName"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:id="@+id/team"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textStyle="bold"
+                                    style="@style/TextAppearance.AppCompat.Headline"
+                                    android:text="Team"/>
+                                <TextView
+                                    android:id="@+id/txt_team"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    style="@style/TextAppearance.AppCompat.Body1"
+                                    android:text=""/>
+
+                            </LinearLayout>
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_margin="10dp"
+                        android:background="@color/blackTextColor" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="2"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/txt_titleEngineerList"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Engineer In Team"
+                            android:textSize="19dp"
+                            android:textStyle="bold"
+                            android:background="@drawable/box_shape2"
+                            style="@style/TextAppearance.AppCompat.Headline"
+                            android:textAlignment="center"/>
+                        <TextView
+                            android:id="@+id/txt_informTeam"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textSize="14dp"
+                            android:text="No team"
+                            android:visibility="gone"
+                            android:textAlignment="center"/>
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/recycler_personProject"
+                            android:layout_width="match_parent"
+                            android:padding="10dp"
+                            android:layout_height="match_parent">
+
+                        </androidx.recyclerview.widget.RecyclerView>
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>
