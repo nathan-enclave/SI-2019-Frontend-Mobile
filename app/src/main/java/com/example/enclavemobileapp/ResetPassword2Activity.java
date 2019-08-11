@@ -32,7 +32,7 @@ public class ResetPassword2Activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reset_password2);
-
+        getSupportActionBar().hide();
         addControls();
     }
 
