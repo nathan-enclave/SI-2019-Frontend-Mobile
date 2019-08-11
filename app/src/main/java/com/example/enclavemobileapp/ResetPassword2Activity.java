@@ -2,7 +2,6 @@ package com.example.enclavemobileapp;
 
 import android.content.Intent;
 import android.os.AsyncTask;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -11,6 +10,9 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+
 import org.json.JSONObject;
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
@@ -35,6 +37,7 @@ public class ResetPassword2Activity extends AppCompatActivity {
     }
 
     private void addControls() {
+
         progressBar = findViewById(R.id.progressBar);
         edtEmail = findViewById(R.id.edt_email);
         edtPassword = findViewById(R.id.edt_password);
@@ -52,6 +55,7 @@ public class ResetPassword2Activity extends AppCompatActivity {
         edtCode.setVisibility(View.GONE);
         btnConfirm.setVisibility(View.GONE);
         txtInform.setVisibility(View.GONE);
+
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -61,6 +65,7 @@ public class ResetPassword2Activity extends AppCompatActivity {
         btnResetPassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 if (TextUtils.isEmpty(Email)) {
                     progressBar.setVisibility(View.GONE);
                     Toast.makeText(getApplication(), "Enter your new password", Toast.LENGTH_SHORT).show();
@@ -106,6 +111,7 @@ public class ResetPassword2Activity extends AppCompatActivity {
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
+
         }
 
         @Override
@@ -131,6 +137,7 @@ public class ResetPassword2Activity extends AppCompatActivity {
                 br.close();
                 os.flush();
                 os.close();
+
                 final int status = conn.getResponseCode();
                 runOnUiThread(new Runnable() {
                     @Override
@@ -153,10 +160,12 @@ public class ResetPassword2Activity extends AppCompatActivity {
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
+
         }
 
         @Override
         protected String doInBackground(String... strings) {
+
             try{
                 URL url = new URL("http://si-enclave.herokuapp.com/api/v1/auth/forget/resetPassword/"+id);
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -178,6 +187,7 @@ public class ResetPassword2Activity extends AppCompatActivity {
                 br.close();
                 os.flush();
                 os.close();
+
                 final int status = conn.getResponseCode();
                 runOnUiThread(new Runnable() {
                     @Override
@@ -193,7 +203,6 @@ public class ResetPassword2Activity extends AppCompatActivity {
                         }
                     }
                 });
-
             }catch (Exception ex){
             }
             return null;

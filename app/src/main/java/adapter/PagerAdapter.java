@@ -1,11 +1,11 @@
 package adapter;
 
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentStatePagerAdapter;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentStatePagerAdapter;
+
 import com.example.enclavemobileapp.Tab1;
 import com.example.enclavemobileapp.Tab2;
-import com.example.enclavemobileapp.Tab3;
 
 public class PagerAdapter extends FragmentStatePagerAdapter {
 
@@ -28,9 +28,6 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
             case 1:
                 Tab2 tab2 = new Tab2();
                 return  tab2;
-            case 2:
-                Tab3 tab3 = new Tab3();
-                return  tab3;
             default:
                 return null;
         }

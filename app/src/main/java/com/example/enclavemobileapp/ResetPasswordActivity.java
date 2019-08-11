@@ -2,7 +2,6 @@ package com.example.enclavemobileapp;
 
 import android.content.Intent;
 import android.os.AsyncTask;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -10,6 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
+import androidx.appcompat.app.AppCompatActivity;
 import org.json.JSONObject;
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
@@ -28,7 +28,7 @@ public class ResetPasswordActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reset_password);
-        getSupportActionBar().hide();
+
         addControls();
     }
 
@@ -37,6 +37,7 @@ public class ResetPasswordActivity extends AppCompatActivity {
         edtEmail = findViewById(R.id.edt_email);
         btnBack = findViewById(R.id.btn_back);
         btnResetPassword = findViewById(R.id.btn_reset_password);
+
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -71,6 +72,7 @@ public class ResetPasswordActivity extends AppCompatActivity {
     public final static boolean isValidEmail(CharSequence target) {
         if (target == null)
             return false;
+
         return android.util.Patterns.EMAIL_ADDRESS.matcher(target).matches();
     }
 
@@ -102,9 +104,11 @@ public class ResetPasswordActivity extends AppCompatActivity {
                 }
                 JSONObject jsonObject = new JSONObject(builder.toString());
                 id = jsonObject.getInt("id");
+
                 br.close();
                 os.flush();
                 os.close();
+
                 final int status = conn.getResponseCode();
                 runOnUiThread(new Runnable() {
                     @Override
@@ -119,12 +123,19 @@ public class ResetPasswordActivity extends AppCompatActivity {
                                 break;
                             case 404:
                                 Toast.makeText(ResetPasswordActivity.this, "Something wrong!!", Toast.LENGTH_SHORT).show();
+                                progressBar.setVisibility(View.GONE);
                                 break;
                         }
                     }
                 });
-
             }catch (Exception ex){
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(ResetPasswordActivity.this, "Something wrong!!", Toast.LENGTH_SHORT).show();
+                        progressBar.setVisibility(View.GONE);
+                    }
+                });
             }
             return null;
         }
