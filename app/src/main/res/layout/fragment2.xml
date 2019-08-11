@@ -1,49 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    tools:context=".Tab2"
     android:id="@+id/tab2">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
-        android:orientation="vertical">
-
-        <LinearLayout
-            android:id="@+id/ll_pro"
+        android:layout_height="200dp"
+        android:layout_marginTop="10dp">
+        <com.github.mikephil.charting.charts.BarChart
+            android:id="@+id/chart1"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-            <ProgressBar
-                android:id="@+id/progressBar"
-                android:indeterminateDrawable="@drawable/my_progress_indeterminate"
-                android:layout_height="100dp"
-                android:layout_width="match_parent"
-                android:layout_gravity="center"/>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-            <TextView
-                android:gravity="center"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Cash Flow"/>
-
-            <com.github.mikephil.charting.charts.BarChart
-                android:id="@+id/chart1"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-            </com.github.mikephil.charting.charts.BarChart>
-
-        </LinearLayout>
-
+        </com.github.mikephil.charting.charts.BarChart>
     </LinearLayout>
-
-</FrameLayout>
+</LinearLayout>

@@ -2,7 +2,6 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -20,22 +19,25 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <com.google.android.material.tabs.TabLayout
+            <android.support.design.widget.TabLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/tablayout"
                 android:background="@color/colorPrimary"
                 android:minHeight="?attr/actionBarSize"
                 android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
-
-            </com.google.android.material.tabs.TabLayout>
-
-            <androidx.viewpager.widget.ViewPager
+            </android.support.design.widget.TabLayout>
+            <android.support.v4.view.ViewPager
                 android:id="@+id/pager"
                 android:layout_width="match_parent"
                 android:layout_height="250dp">
 
-            </androidx.viewpager.widget.ViewPager>
+                <ProgressBar
+                    android:id="@+id/progress"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp" />
+
+            </android.support.v4.view.ViewPager>
 
             <LinearLayout
                 android:id="@+id/layoutDots"
@@ -43,7 +45,7 @@
                 android:layout_height="30dp"
                 android:gravity="center"
                 android:orientation="horizontal"
-                android:layout_alignBottom="@+id/view_pager"/>
+                android:layout_alignBottom="@+id/view_pager"></LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -58,7 +60,7 @@
                     android:gravity="center"
                     android:orientation="vertical">
 
-                    <androidx.cardview.widget.CardView
+                    <android.support.v7.widget.CardView
                         android:id="@+id/bankcardId"
                         android:layout_width="match_parent"
                         android:layout_height="100dp"
@@ -72,83 +74,69 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:gravity="center"
-                            android:orientation="horizontal"
-                            android:background="@drawable/engineerbgr">
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:orientation="horizontal"
-                                android:background="@drawable/bgrect2">
+                            android:orientation="horizontal">
 
-                                <TextView
-                                    android:id="@+id/txt_engineers"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:padding="5dp"
-                                    android:textSize="30dp"
-                                    android:textStyle="bold"
-                                    android:layout_marginTop="10dp"
-                                    android:layout_marginLeft="10dp" />
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text=" Engineers"
-                                    android:textSize="20dp"
-                                    android:textStyle="bold"
-                                    android:layout_marginTop="20dp"/>
-                            </LinearLayout>
+                            <TextView
+                                android:id="@+id/txt_engineers"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:padding="5dp"
 
+                                android:textSize="28dp"
+                                android:textStyle="bold" />
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text=" Engineers"
+                                android:textSize="18dp"
+                                android:textStyle="bold"/>
                         </LinearLayout>
+                    </android.support.v7.widget.CardView>
 
-                    </androidx.cardview.widget.CardView>
-
-                    <androidx.cardview.widget.CardView
+                    <android.support.v7.widget.CardView
                         android:layout_width="match_parent"
-                        android:layout_height="170dp"
-                        android:layout_marginTop="5dp"
-                        android:layout_marginRight="3dp"
-                        android:layout_marginBottom="5dp"
+                        android:layout_height="190dp"
                         android:clickable="true"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginBottom="5dp"
+                        android:layout_marginRight="3dp"
                         android:foreground="?android:attr/selectableItemBackground">
 
                         <LinearLayout
-                            android:id="@+id/ll_project"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:background="@drawable/probgr"
                             android:gravity="center"
                             android:orientation="vertical">
 
-                            <LinearLayout
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="10dp"
+                                android:text="Projects"
+                                android:textSize="18dp"
+                                android:textStyle="bold" />
+
+                            <View
                                 android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:background="@drawable/bgrect3"
-                                android:orientation="vertical">
+                                android:layout_height="1dp"
+                                android:layout_margin="10dp"
+                                android:background="@color/lightgray" />
 
-                                <TextView
-                                    android:id="@+id/txt_pro"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginTop="10dp"
-                                    android:gravity="center"
-                                    android:padding="5dp"
-                                    android:textSize="45dp"
-                                    android:layout_marginLeft="10dp"
-                                    android:textStyle="bold" />
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="Projects"
-                                    android:textSize="20dp"
-                                    android:textStyle="bold"
-                                    android:layout_marginLeft="20dp"/>
-
-                            </LinearLayout>
-
+                            <TextView
+                                android:id="@+id/txt_pro"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:padding="5dp"
+                                android:textSize="25dp"
+                                android:textStyle="bold" />
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="60dp"
+                                android:src="@drawable/inc" />
                         </LinearLayout>
-
-                    </androidx.cardview.widget.CardView>
+                    </android.support.v7.widget.CardView>
 
                 </LinearLayout>
 
@@ -160,52 +148,55 @@
                     android:gravity="center"
                     android:orientation="vertical">
 
-                    <androidx.cardview.widget.CardView
+                    <android.support.v7.widget.CardView
                         android:layout_width="match_parent"
-                        android:layout_height="170dp"
+                        android:layout_height="190dp"
                         android:clickable="true"
                         android:layout_marginLeft="3dp"
                         android:layout_marginTop="10dp"
                         android:foreground="?android:attr/selectableItemBackground">
 
                         <LinearLayout
-                            android:id="@+id/ll_team"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:background="@drawable/teambgr"
+                            android:gravity="center"
                             android:orientation="vertical">
 
-                            <LinearLayout
+                            <ImageView
                                 android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:orientation="vertical"
-                                android:background="@drawable/bgrect3">
+                                android:layout_height="50dp"
+                                android:background="@drawable/increase"
+                                android:padding="10dp"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginRight="10dp"
+                                app:srcCompat="@drawable/ic_group_black_24dp" />
 
-                                <TextView
-                                    android:id="@+id/txt_team"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginLeft="10dp"
-                                    android:padding="5dp"
-                                    android:textSize="45dp"
-                                    android:textStyle="bold"
-                                    android:layout_marginTop="20dp"/>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="10dp"
+                                android:text="Teams"
+                                android:textSize="18dp"
+                                android:textStyle="bold" />
 
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="Teams"
-                                    android:textSize="20dp"
-                                    android:layout_marginLeft="20dp"
-                                    android:textStyle="bold" />
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:layout_margin="10dp"
+                                android:background="@color/lightgray" />
 
-                            </LinearLayout>
-
+                            <TextView
+                                android:id="@+id/txt_team"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:padding="5dp"
+                                android:textSize="25dp"
+                                android:textStyle="bold" />
                         </LinearLayout>
+                    </android.support.v7.widget.CardView>
 
-                    </androidx.cardview.widget.CardView>
-
-                    <androidx.cardview.widget.CardView
+                    <android.support.v7.widget.CardView
                         android:layout_width="match_parent"
                         android:layout_height="100dp"
                         android:clickable="true"
@@ -218,46 +209,28 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:gravity="center"
-                            android:orientation="horizontal"
-                            android:background="@drawable/managerbgr">
+                            android:orientation="horizontal">
 
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:orientation="horizontal"
-                                android:background="@drawable/bgrect2">
+                            <TextView
+                                android:id="@+id/txt_manager"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:padding="5dp"
+                                android:textSize="28dp"
+                                android:textStyle="bold" />
 
-                                <TextView
-                                    android:id="@+id/txt_manager"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:padding="5dp"
-                                    android:textSize="30dp"
-                                    android:textStyle="bold"
-                                    android:layout_marginTop="10dp"
-                                    android:layout_marginLeft="10dp"/>
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text=" Managers"
-                                    android:textSize="20dp"
-                                    android:textStyle="bold"
-                                    android:layout_marginTop="20dp"/>
-
-                            </LinearLayout>
-
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text=" Managers"
+                                android:textSize="18dp"
+                                android:textStyle="bold" />
                         </LinearLayout>
-
-                    </androidx.cardview.widget.CardView>
-
+                    </android.support.v7.widget.CardView>
                 </LinearLayout>
-
             </LinearLayout>
-
         </LinearLayout>
-
     </ScrollView>
-
 </LinearLayout>
 
